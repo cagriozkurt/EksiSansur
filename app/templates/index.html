@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ekşi Sansür</title>
+    <script src={{ url_for('static', filename='jquery-3.6.0.min.js' ) }}></script>
+    <link rel="stylesheet" href={{ url_for('static', filename='jquery.dataTables.min.css' ) }}>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        @media (min-width:768px) {
+            .container {
+                width: 750px
+            }
+        }
+
+        @media (min-width:992px) {
+            .container {
+                width: 970px
+            }
+        }
+
+        @media (min-width:1200px) {
+            .container {
+                width: 1170px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="padding-right: 25px; padding-left: 25px; margin-right: auto; margin-left: auto;">
+        <main>
+            <table id="topics_table" class="display">
+                <thead>
+                    <tr>
+                        <th>Topic ID</th>
+                        <th>Topic Title</th>
+                        <th>Censor Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for col in items %}
+                    <tr>
+                        <td> {{ col[0] }}</td>
+                        <td> {{ col[1] }}</td>
+                        <td> {{ col[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src={{ url_for('static', filename='jquery.dataTables.min.js' ) }}></script>
+    <script src={{ url_for('static', filename='dataTables.responsive.min.js' ) }}></script>
+    <script>
+        $(document).ready(function () {
+            $('#topics_table').DataTable({
+                "pageLength": 100,
+                "order": [2, "desc"],
+                responsive: true
+            });
+        });
+    </script>
+</body>
+
+</html>
